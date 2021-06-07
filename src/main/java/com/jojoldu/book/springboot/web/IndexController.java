@@ -1,5 +1,7 @@
 package com.jojoldu.book.springboot.web;
 
+import com.jojoldu.book.springboot.config.auth.LoginUser;
+import com.jojoldu.book.springboot.config.auth.dto.SessionUser;
 import com.jojoldu.book.springboot.service.posts.PostsService;
 import com.jojoldu.book.springboot.web.dto.PostsResponseDTO;
 import lombok.RequiredArgsConstructor;
@@ -8,14 +10,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpSession;
+
 @RequiredArgsConstructor
 @Controller
 public class IndexController {
     private final PostsService postsService;
+    private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model){ //Model ==> 객체 저장가능
+    public String index(Model model, @LoginUser SessionUser user){ //Model ==> 객체 저장가능
         model.addAttribute("posts",postsService.findAllDesc());
+
+        //세션에 저장된 user를 가져와 model에 저장
+        if(user !=null){
+            model.addAttribute("userName", user.getName());
+        }
+        System.out.println(user);
         return "index";
     }
 
@@ -31,6 +42,7 @@ public class IndexController {
 
         return "posts-update";
     }
+
 
 
 }

@@ -25,6 +25,7 @@ dependencies {
 
     // lombok
     implementation('org.projectlombok:lombok')
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     annotationProcessor('org.projectlombok:lombok')
     testImplementation('org.projectlombok:lombok')
     testAnnotationProcessor('org.projectlombok:lombok')
@@ -32,6 +33,11 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
     implementation("org.mariadb.jdbc:mariadb-java-client")
     implementation('com.h2database:h2')
+
+    //스프링 시큐리티 설정(소셜 로그인 클라이언트 입장에서 소셜기능구현시 필요한 의존성)
+    implementation('org.springframework.boot:spring-boot-starter-oauth2-client')
+    implementation('org.springframework.session:spring-session-jdbc')
+    testImplementation("org.springframework.security:spring-security-test")
 
     testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
