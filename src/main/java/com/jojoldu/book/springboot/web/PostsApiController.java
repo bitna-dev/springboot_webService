@@ -17,17 +17,25 @@ public class PostsApiController {
         return postsService.save(requestDTO);
     }
 
-    //아이디를 이용한 수정
+    //글번호를 이용한 수정
     @PutMapping("/api/v1/posts/{id}")
     public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDTO requestDTO){
         return postsService.update(id, requestDTO);
     }
 
-    //아이디를 이용한 조회
+    //글번호를 이용한 조회
     @GetMapping("/api/v1/posts/{id}")
     public PostsResponseDTO findById (@PathVariable Long id){
         return postsService.findById(id);
     }
+
+    //글번호를 이용한 삭제
+    @DeleteMapping("/api/v1/posts/{id}")
+    public Long delete(@PathVariable Long id){
+        postsService.delete(id);
+        return id;
+    }
+
 
     //참고사항
     /*
